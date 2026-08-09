@@ -295,3 +295,70 @@
     }
 
 }
+
+    /* =========================================
+   MOBILE NAVBAR FIX
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .custom-navbar {
+        padding: 12px 15px;
+    }
+
+    .custom-navbar .navbar-toggler {
+        display: block;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 8px 10px;
+        box-shadow: none;
+    }
+
+    .custom-navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .custom-navbar .navbar-toggler-icon {
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        background-image: var(--bs-navbar-toggler-icon-bg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+    }
+
+    .custom-navbar .navbar-collapse {
+        background: rgba(15, 23, 42, 0.98);
+        margin-top: 12px;
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .custom-navbar .navbar-nav {
+        width: 100%;
+        text-align: center;
+    }
+
+    .custom-navbar .nav-item {
+        margin: 4px 0;
+    }
+
+    .custom-navbar .nav-link {
+        display: block;
+        padding: 10px 15px;
+        color: #fff !important;
+    }
+
+    .custom-navbar .navbar-right {
+        margin-top: 15px;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .custom-navbar .nav-phone,
+    .custom-navbar .nav-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
