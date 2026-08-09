@@ -1,0 +1,297 @@
+
+/* ================= NAVBAR ================= */
+
+.custom-navbar {
+    background: white;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    padding: 1px 0;
+
+    border-bottom: 2px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.18);
+
+    transition: all 0.3s ease;
+}
+
+
+/* Logo */
+
+.navbar-brand {
+    text-decoration: none;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #f5a282,
+        #7c3aed
+    );
+
+    color: black;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-name {
+    color: black;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand-name span {
+    color: #fa6060;
+}
+
+.brand-text small {
+    color: rgba(14, 13, 13, 0.65);
+    font-size: 9px;
+    margin-top: 5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    
+}
+
+
+/* Navigation */
+
+.navbar-nav {
+    gap: 15px;
+}
+
+.navbar .nav-link {
+    position: relative;
+
+    color: rgba(10, 10, 10, 0.82);
+
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 10px 13px !important;
+
+    transition: all 0.3s ease;
+}
+
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: orangered;
+}
+
+
+/* Active underline */
+
+.navbar .nav-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+    bottom: 3px;
+
+    height: 2px;
+
+    background: #60a5fa;
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition: transform 0.3s ease;
+}
+
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+
+
+
+/* Phone */
+
+.nav-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: rgb(8, 8, 8);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+.nav-phone i {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(37,99,235,0.2);
+
+    color: #0c0c0c;
+}
+
+.nav-phone span {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-phone small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 10px;
+}
+
+.nav-phone:hover {
+    color: #fa6074;
+}
+
+
+/* CTA */
+
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 17px;
+
+    color: rgb(26, 24, 24);
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+        0 6px 18px rgba(37,99,235,0.3);
+
+    transition: all 0.3s ease;
+}
+
+.nav-cta:hover {
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 25px rgba(37,99,235,0.45);
+}
+
+
+/* Dropdown */
+
+.dropdown-menu {
+    margin-top: 12px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 8px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.2);
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    padding: 9px 12px;
+}
+
+.dropdown-item:hover {
+    background: #080808;
+    color: #2563eb;
+}
+
+
+/* Mobile */
+
+@media (max-width: 991px) {
+
+    .custom-navbar {
+        padding: 10px 0;
+    }
+
+    .navbar-collapse {
+        margin-top: 15px;
+
+        padding: 15px;
+
+        border-radius: 15px;
+
+        background: rgba(15,23,42,0.97);
+    }
+
+    .navbar-nav {
+        gap: 2px;
+    }
+
+    .navbar .nav-link {
+        padding: 12px !important;
+    }
+
+    .navbar .nav-link::after {
+        display: none;
+    }
+
+    .navbar-right {
+        flex-direction: column;
+        align-items: stretch !important;
+
+        margin-top: 15px;
+
+        padding-top: 15px;
+
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-phone {
+        justify-content: center;
+    }
+
+    .nav-cta {
+        justify-content: center;
+    }
+
+}

@@ -1,0 +1,697 @@
+
+/* =====================================================
+   CONTACT SECTION
+===================================================== */
+
+.contact-section {
+    min-height: 100vh;
+
+    padding: 150px 0 100px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15,23,42,0.97),
+            rgba(15,23,42,0.92)
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* ================= HEADING ================= */
+
+.contact-heading {
+    max-width: 750px;
+
+    margin: 0 auto 60px;
+}
+
+
+.contact-badge {
+    display: inline-block;
+
+    padding: 8px 17px;
+
+    margin-bottom: 18px;
+
+    border-radius: 30px;
+
+    color: #60a5fa;
+
+    background: rgba(96,165,250,0.10);
+
+    border: 1px solid rgba(96,165,250,0.20);
+
+    font-size: 12px;
+
+    font-weight: 400;
+
+    letter-spacing: 2px;
+}
+
+
+.contact-heading h1 {
+    font-size: clamp(2.3rem, 5vw, 3.6rem);
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    margin-bottom: 18px;
+}
+
+
+.contact-heading h1 span {
+    display: block;
+
+    color: #60a5fa;
+}
+
+
+.contact-heading p {
+    color: rgba(255,255,255,0.62);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+/* ================= CONTACT INFO ================= */
+
+.contact-info-card,
+.contact-form-card {
+    height: 100%;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+.contact-info-card h2 {
+    font-size: 27px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+
+.contact-info-intro {
+    color: rgba(255,255,255,0.58);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 28px;
+}
+
+
+/* Contact Item */
+
+.contact-info-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    text-decoration: none;
+
+    color: white;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.07);
+
+    transition: 0.3s;
+}
+
+
+.contact-info-item:hover {
+    color: white;
+
+    transform: translateX(5px);
+}
+
+
+.contact-icon {
+    flex-shrink: 0;
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #60a5fa;
+
+    background:
+        rgba(96,165,250,0.10);
+
+    border:
+        1px solid rgba(96,165,250,0.15);
+
+    font-size: 18px;
+}
+
+
+.contact-info-item > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.contact-info-item small {
+    color: rgba(255,255,255,0.45);
+
+    font-size: 10px;
+
+    margin-bottom: 3px;
+}
+
+
+.contact-info-item strong {
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.whatsapp-icon {
+    color: #4ade80;
+
+    background:
+        rgba(74,222,128,0.10);
+
+    border-color:
+        rgba(74,222,128,0.15);
+}
+
+
+/* Social */
+
+.contact-social {
+    padding-top: 25px;
+}
+
+
+.contact-social > span {
+    display: block;
+
+    color: rgba(255,255,255,0.55);
+
+    font-size: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+.social-links {
+    display: flex;
+
+    gap: 9px;
+}
+
+
+.social-links a {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+
+.social-links a:hover {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    transform: translateY(-3px);
+}
+
+
+/* ================= FORM ================= */
+
+.form-header {
+    margin-bottom: 25px;
+}
+
+
+.form-header > span {
+    color: #60a5fa;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.form-header h2 {
+    font-size: 27px;
+
+    font-weight: 700;
+
+    margin: 7px 0;
+}
+
+
+.form-header p {
+    color: rgba(255,255,255,0.55);
+
+    font-size: 13px;
+
+    margin: 0;
+}
+
+
+.contact-form-card label {
+    display: block;
+
+    color: rgba(255,255,255,0.75);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+
+.input-wrapper {
+    position: relative;
+}
+
+
+.input-wrapper > i {
+    position: absolute;
+
+    top: 50%;
+    left: 14px;
+
+    transform: translateY(-50%);
+
+    color: #60a5fa;
+
+    font-size: 15px;
+
+    z-index: 2;
+}
+
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+    width: 100%;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+
+.input-wrapper input,
+.input-wrapper select {
+    height: 48px;
+
+    padding:
+        0 15px 0 42px;
+}
+
+
+.input-wrapper textarea {
+    padding:
+        14px 15px 14px 42px;
+
+    resize: vertical;
+}
+
+
+.input-wrapper select {
+    appearance: none;
+
+    cursor: pointer;
+}
+
+
+.input-wrapper select option {
+    color: #111827;
+
+    background: white;
+}
+
+
+.input-wrapper textarea + i,
+.textarea-wrapper > i {
+    top: 20px;
+
+    transform: none;
+}
+
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+    border-color: #60a5fa;
+
+    background:
+        rgba(96,165,250,0.08);
+
+    box-shadow:
+        0 0 0 3px rgba(96,165,250,0.08);
+}
+
+
+/* Submit */
+
+.contact-submit-btn {
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.contact-submit-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,0.30);
+}
+
+
+/* ================= MAP ================= */
+
+.contact-location {
+    margin-top: 80px;
+}
+
+
+.location-header {
+    margin-bottom: 25px;
+}
+
+
+.location-header span {
+    color: #60a5fa;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.location-header h2 {
+    font-size: 30px;
+
+    font-weight: 800;
+
+    margin-top: 8px;
+}
+
+
+.map-container {
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.25);
+}
+
+
+.map-container iframe {
+    display: block;
+
+    filter:
+        grayscale(0.15)
+        contrast(1.05);
+}
+
+
+/* ================= BOTTOM CTA ================= */
+
+.contact-bottom {
+    margin-top: 45px;
+
+    padding: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,0.17),
+            rgba(124,58,237,0.17)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+}
+
+
+.contact-bottom h3 {
+    margin: 0 0 6px;
+
+    font-size: 21px;
+}
+
+
+.contact-bottom p {
+    margin: 0;
+
+    color: rgba(255,255,255,0.55);
+
+    font-size: 13px;
+}
+
+
+.contact-bottom-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+.call-btn,
+.whatsapp-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.call-btn {
+    color: #2563eb;
+
+    background: white;
+}
+
+
+.call-btn:hover {
+    color: #1d4ed8;
+
+    transform: translateY(-3px);
+}
+
+
+.whatsapp-btn {
+    color: white;
+
+    background: #16a34a;
+}
+
+
+.whatsapp-btn:hover {
+    color: white;
+
+    background: #15803d;
+
+    transform: translateY(-3px);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 991px) {
+
+    .contact-section {
+        padding-top: 130px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .contact-info-card,
+    .contact-form-card {
+        padding: 25px;
+    }
+
+    .contact-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .contact-section {
+        padding: 120px 0 70px;
+    }
+
+    .contact-heading {
+        margin-bottom: 40px;
+    }
+
+    .contact-heading h1 {
+        font-size: 2.3rem;
+    }
+
+    .contact-info-card,
+    .contact-form-card {
+        padding: 22px;
+    }
+
+    .contact-bottom {
+        padding: 25px;
+    }
+
+    .contact-bottom-buttons {
+        width: 100%;
+    }
+
+    .call-btn,
+    .whatsapp-btn {
+        flex: 1;
+
+        justify-content: center;
+    }
+
+    .map-container iframe {
+        height: 300px;
+    }
+
+}
