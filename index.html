@@ -1,0 +1,2297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Auto Scrolling Hero Slider</title>
+
+    <!-- Bootstrap 5.3.3 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('./images/background.jpg')
+                center center / cover no-repeat fixed;
+            min-height: 100vh;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                rgba(37, 99, 235, 0.35),
+                rgba(139, 92, 246, 0.35)
+            );
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            padding: 120px 0 80px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Hero Text */
+        .hero h1 {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            animation: fadeUp 1.4s ease-out;
+        }
+
+        .hero .btn {
+            animation: fadeUp 1.8s ease-out;
+
+            background: #ffffff;
+            color: #2563eb;
+
+            border: none;
+            transition: 0.3s;
+        }
+
+        .hero .btn:hover {
+            transform: translateY(-3px);
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* Slider Container */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        /* Slider Track */
+        .slider-track {
+            display: flex;
+            width: max-content;
+            gap: 20px;
+
+            animation: scroll 40s linear infinite;
+        }
+
+        /* Pause slider when mouse is over it */
+        .slider-container:hover .slider-track {
+            animation-play-state: paused;
+        }
+
+        /* Slider Images */
+        .slider-track img {
+            width: 350px;
+            height: 230px;
+
+            object-fit: cover;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.25);
+
+            transition: 0.4s;
+
+            flex-shrink: 0;
+        }
+
+        .slider-track img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Slide Left Animation */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Fade Up Animation */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Auto Scroll Animation */
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 991px) {
+
+            .hero {
+                padding: 110px 0 60px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .slider-track img {
+                width: 280px;
+                height: 190px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .slider-track img {
+                width: 240px;
+                height: 165px;
+            }
+        }
+    </style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet" href="./css/navbar.css">
+<style>
+/* Hide all pages initially */
+    .page-section {
+        display: none;
+    }
+    
+    /* Show selected page */
+    .page-section.active-section {
+        display: block;
+    }</style>
+
+    <script>
+function showSection(sectionId) {
+
+    // Hide all sections
+    const sections = document.querySelectorAll('.page-section');
+
+    sections.forEach(function(section) {
+        section.classList.remove('active-section');
+    });
+
+    // Show selected section
+    const selectedSection = document.getElementById(sectionId);
+
+    if (selectedSection) {
+        selectedSection.classList.add('active-section');
+    }
+
+    // Update active navbar
+    const navLinks = document.querySelectorAll('.navbar .nav-link');
+
+    navLinks.forEach(function(link) {
+        link.classList.remove('active');
+    });
+
+    // Find clicked link
+    const clickedLink = document.querySelector(
+        '.navbar .nav-link[onclick*="' + sectionId + '"]'
+    );
+
+    if (clickedLink) {
+        clickedLink.classList.add('active');
+    }
+
+    // Scroll to top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+
+// Show Home when website loads
+document.addEventListener('DOMContentLoaded', function() {
+    showSection('home');
+});
+</script>
+ 
+</head>
+
+<body>
+
+    <!-- Navbar -->
+  <!-- ================= NAVBAR ================= --> 
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+     <div class="container"> <!-- Logo --> 
+        <a class="navbar-brand d-flex align-items-center" href="#">
+             <div class="logo-icon"> <i class="bi bi-car-front-fill"></i> </div> 
+             <div class="brand-text"> <span class="brand-name">GO<span>RIDE</span></span> <small>Travel & Tours</small> </div> </a> 
+             <!-- Mobile Toggle --> 
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"></span>
+             </button> <!-- Navigation --> 
+             <div class="collapse navbar-collapse" id="mainNavbar">
+                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> 
+                    <li class="nav-item"> <a class="nav-link active" href="#" onclick="showSection('home')"> Home </a> </li>
+                     <li class="nav-item"> <a class="nav-link" href="#"  onclick="showSection('about')"> About Us </a> </li> 
+                     <li class="nav-item"> <a class="nav-link" href="#" onclick="showSection('services')"> Services </a> </li> 
+                     <li class="nav-item"> <a class="nav-link" href="#" onclick="showSection('fleet')" > Our Fleet </a> </li>
+                  
+                       <li class="nav-item"> <a class="nav-link" href="#" onclick="showSection('contact')"> Contact </a> </li> 
+                    </ul> <!-- Right Side --> <div class="navbar-right d-flex align-items-center gap-3"> 
+                      
+                         <!-- Phone --> <a href="tel:+917218663586" class="nav-phone"> <i class="bi bi-telephone-fill"></i> <span> <small>Call Us</small> +91 7218663586 </span> </a> 
+                         <!-- CTA --> <a href="#contact" class="nav-cta"> Get a Quote <i class="bi bi-arrow-right"></i> </a> </div> </div> </div> </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero page-section" id="home">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <!-- Hero Content -->
+                <div class="col-lg-5 mb-5 mb-lg-0">
+
+                    <h1 class="display-4 fw-bold">
+                        Your Journey, Our Responsibility
+                    </h1>
+
+                    <p class="lead mt-3">
+                        Reliable, comfortable and affordable cab services for local travel, airport transfers, outstation journeys and corporate transportation.
+                    </p>
+
+                    <a href="#" class="btn btn-light btn-lg mt-3 px-4 py-3">
+                        Call Us Now
+                    </a>
+
+                </div>
+
+
+                <!-- Image Slider -->
+                <div class="col-lg-7">
+
+                    <div class="slider-container">
+
+                        <div class="slider-track">
+
+                            <img
+                                src="./images/angelo-moleele-AuR8XfPLUXI-unsplash.jpg"
+                                alt="Business Image"
+                            >
+
+<img
+src="./images/ertiga.jpg"
+alt="Business Image"
+>  <img
+src="./images/premium-suv.jpg"
+alt="Business Image"
+>  <img
+src="./images/sedan.jpg"
+alt="Business Image"
+>  <img
+src="./images/suv.jpg"
+alt="Business Image"
+>  <img
+src="./images/luxury-car.jpg"
+alt="Business Image"
+>  <img
+src="./images/ertiga1.jpg"
+alt="Business Image"
+>  <img
+src="./images/angelo-moleele-AuR8XfPLUXI-unsplash.jpg"
+alt="Business Image"
+>
+
+                           
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- ================= SERVICES SECTION ================= -->
+<link rel="stylesheet" href="./css/services.css">
+<section class="services-section page-section" id="services">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="section-heading text-center">
+
+            <span class="section-badge">
+                OUR SERVICES
+            </span>
+
+            <h2>
+                Reliable Cab Services
+                <span>For Every Journey</span>
+            </h2>
+
+            <p>
+                From everyday city travel to airport transfers,
+                outstation journeys and corporate transportation,
+                we provide comfortable and dependable travel
+                solutions designed around your needs.
+            </p>
+
+        </div>
+
+
+        <!-- Services Cards -->
+        <div class="row g-4">
+
+
+            <!-- Local Cab -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+
+                    <h3>
+                        Local Cab Service
+                    </h3>
+
+                    <p>
+                        Convenient and comfortable cab services
+                        for your daily local travel, shopping,
+                        appointments and city transportation.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Airport -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-airplane-fill"></i>
+                    </div>
+
+                    <h3>
+                        Airport Transfer
+                    </h3>
+
+                    <p>
+                        Hassle-free airport pickup and drop
+                        services with punctual drivers and
+                        comfortable vehicles.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Outstation -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-signpost-split-fill"></i>
+                    </div>
+
+                    <h3>
+                        Outstation Cab
+                    </h3>
+
+                    <p>
+                        Comfortable one-way and round-trip
+                        cab services for holidays, weekend trips
+                        and long-distance journeys.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Corporate -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+
+                    <h3>
+                        Corporate Travel
+                    </h3>
+
+                    <p>
+                        Professional transportation solutions
+                        for employees, clients, meetings,
+                        conferences and business travel.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Family -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+
+                    <h3>
+                        Family & Group Travel
+                    </h3>
+
+                    <p>
+                        Spacious and comfortable vehicles
+                        for family vacations, group tours,
+                        functions and special occasions.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- One Way -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="bi bi-arrow-right-circle-fill"></i>
+                    </div>
+
+                    <h3>
+                        One-Way Cab
+                    </h3>
+
+                    <p>
+                        Convenient one-way travel for
+                        intercity and long-distance journeys
+                        without unnecessary return charges.
+                    </p>
+
+                    <a href="#contact" class="service-link">
+                        Enquire Now
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom CTA -->
+        <div class="services-bottom text-center">
+
+            <p>
+                Looking for a comfortable and reliable ride?
+            </p>
+
+            <a href="#contact" class="services-btn">
+                Contact Us
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<link rel="stylesheet" href="./css/fleets.css"/>
+<!-- =====================================================
+     OUR FLEET SECTION
+===================================================== -->
+
+<section class="fleet-section page-section" id="fleet">
+
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="fleet-heading text-center">
+
+            <span class="fleet-badge">
+                OUR FLEET
+            </span>
+
+            <h1>
+                Comfortable Vehicles
+                <span>For Every Journey</span>
+            </h1>
+
+            <p>
+                Choose from our range of clean, comfortable and
+                well-maintained vehicles. Whether you are travelling
+                alone, with family or in a group, we have the right
+                vehicle for your journey.
+            </p>
+
+        </div>
+
+
+        <!-- Fleet Cards -->
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 ERTIGA
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/ertiga.jpg"
+                            alt="Maruti Suzuki Ertiga">
+
+                        <span class="fleet-tag">
+                            Popular
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            Maruti Suzuki Ertiga
+                        </h3>
+
+                        <p class="fleet-description">
+                            Spacious and comfortable MPV, ideal for
+                            families, airport transfers, outstation
+                            journeys and group travel.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>6+1</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>3</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-snow"></i>
+                                <span>
+                                    <strong>AC</strong>
+                                    <small>Comfort</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEDAN
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/sedan.jpg"
+                            alt="Comfortable Sedan Cab">
+
+                        <span class="fleet-tag">
+                            Comfortable
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            Sedan
+                        </h3>
+
+                        <p class="fleet-description">
+                            A comfortable and economical choice for
+                            city rides, airport transfers, business
+                            travel and small families.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>4+1</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>2</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-snow"></i>
+                                <span>
+                                    <strong>AC</strong>
+                                    <small>Comfort</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUV
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/suv.jpg"
+                            alt="SUV Cab">
+
+                        <span class="fleet-tag">
+                            Premium
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            SUV
+                        </h3>
+
+                        <p class="fleet-description">
+                            Extra space, comfort and powerful performance
+                            for family trips, long-distance journeys and
+                            outstation travel.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>6+1</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>4</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-snow"></i>
+                                <span>
+                                    <strong>AC</strong>
+                                    <small>Comfort</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PREMIUM SUV
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/premium-suv.jpg"
+                            alt="Premium SUV">
+
+                        <span class="fleet-tag">
+                            Executive
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            Premium SUV
+                        </h3>
+
+                        <p class="fleet-description">
+                            Enjoy a premium travel experience with
+                            additional space, comfort and convenience
+                            for business and leisure travel.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>6+1</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>4</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-snow"></i>
+                                <span>
+                                    <strong>AC</strong>
+                                    <small>Comfort</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TEMPO TRAVELLER
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/tempo-traveller.jpg"
+                            alt="Tempo Traveller">
+
+                        <span class="fleet-tag">
+                            Group Travel
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            Tempo Traveller
+                        </h3>
+
+                        <p class="fleet-description">
+                            An ideal option for large families, group
+                            tours, corporate outings, pilgrimages and
+                            long-distance travel.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>12+</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>8+</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-snow"></i>
+                                <span>
+                                    <strong>AC</strong>
+                                    <small>Comfort</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LUXURY
+            ================================================== -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="fleet-card">
+
+                    <div class="fleet-image">
+
+                        <img
+                            src="./images/luxury-car.jpg"
+                            alt="Luxury Car">
+
+                        <span class="fleet-tag">
+                            Luxury
+                        </span>
+
+                    </div>
+
+
+                    <div class="fleet-content">
+
+                        <h3>
+                            Luxury Car
+                        </h3>
+
+                        <p class="fleet-description">
+                            Premium vehicles for executive travel,
+                            special occasions, weddings, corporate
+                            events and VIP transportation.
+                        </p>
+
+
+                        <div class="fleet-details">
+
+                            <div>
+                                <i class="bi bi-people-fill"></i>
+                                <span>
+                                    <strong>4+1</strong>
+                                    <small>Passengers</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>
+                                    <strong>3</strong>
+                                    <small>Luggage</small>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-stars"></i>
+                                <span>
+                                    <strong>VIP</strong>
+                                    <small>Experience</small>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="#contact"
+                            class="fleet-btn"
+                            onclick="showSection('contact')">
+
+                            Enquire Now
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom Message -->
+
+        <div class="fleet-bottom text-center">
+
+            <h3>
+                Need a vehicle for your next journey?
+            </h3>
+
+            <p>
+                Tell us your travel requirements and we will help
+                you choose the right vehicle for your journey.
+            </p>
+
+            <a
+                href="#contact"
+                class="fleet-main-btn"
+                onclick="showSection('contact')">
+
+                Contact Us
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<link rel="stylesheet" href="./css/about.css">
+<!-- =====================================================
+     ABOUT US SECTION
+===================================================== -->
+
+<section class="about-section page-section" id="about">
+
+    <div class="container">
+
+        <!-- ================= ABOUT HERO ================= -->
+
+        <div class="about-hero">
+
+            <div class="row align-items-center g-5">
+
+                <!-- Left Content -->
+
+                <div class="col-lg-6">
+
+                    <span class="about-badge">
+                        ABOUT OUR COMPANY
+                    </span>
+
+                    <h1>
+                        Your Journey,
+                        <span>Our Responsibility</span>
+                    </h1>
+
+                    <p class="about-lead">
+                        We are committed to providing safe, reliable
+                        and comfortable cab services that make every
+                        journey simple, convenient and stress-free.
+                    </p>
+
+                    <p>
+                        From local city rides and airport transfers
+                        to outstation journeys and corporate travel,
+                        we provide dependable transportation solutions
+                        designed around the needs of our customers.
+                    </p>
+
+
+                    <div class="about-buttons">
+
+                        <a
+                            href="#contact"
+                            class="about-primary-btn"
+                            onclick="showSection('contact')">
+
+                            Contact Us
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+
+                        <a
+                            href="#fleet"
+                            class="about-secondary-btn"
+                            onclick="showSection('fleet')">
+
+                            Explore Our Fleet
+
+                            <i class="bi bi-car-front"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+<style>
+
+.about-main-image {
+    width: 100%;
+    height: 500px;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    border-radius: 28px;
+
+    background: #111827;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+}
+</style>
+                <!-- Right Image -->
+
+                <div class="col-lg-6">
+
+                    <div class="about-image-wrapper">
+
+                        <img
+                            src="./images/ertiga1.jpg"
+                            alt="Professional Cab Service"
+                            class="about-main-image" 
+                        >
+
+
+                        <!-- Experience Card -->
+
+                        <div class="experience-card">
+
+                            <div class="experience-icon">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Trusted Travel
+                                </strong>
+
+                                <small>
+                                    Service You Can Rely On
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Floating Car Icon -->
+
+                        <div class="floating-car">
+
+                            <i class="bi bi-car-front-fill"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= OUR STORY ================= -->
+
+        <style>
+            .story-image {
+    width: 100%;
+    height: 430px;
+
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    background: #111827;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.30);
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 0.5s ease;
+}
+
+.story-image:hover img {
+    transform: scale(1.05);
+}
+        </style>
+
+        <div class="row align-items-center g-5 about-story">
+
+            <!-- Image -->
+
+            <div class="col-lg-5">
+
+                <div class="story-image">
+
+                    <img
+                        src="./images/about-team.jpg"
+                        alt="Our Travel Team"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Content -->
+
+            <div class="col-lg-7">
+
+                <span class="about-small-title">
+                    OUR STORY
+                </span>
+
+                <h2>
+                    More Than Just
+                    <span>A Cab Service</span>
+                </h2>
+
+                <p>
+                    We believe that travelling should be comfortable,
+                    safe and enjoyable. Our goal is to provide
+                    transportation that our customers can depend on
+                    for both everyday journeys and special trips.
+                </p>
+
+                <p>
+                    With a customer-first approach, professional
+                    drivers and well-maintained vehicles, we strive
+                    to deliver a smooth experience from pickup to
+                    destination.
+                </p>
+
+                <p>
+                    Whether you are travelling for work, heading to
+                    the airport, planning a family vacation or
+                    exploring a new destination, we are here to make
+                    your journey easier.
+                </p>
+
+
+                <!-- Highlights -->
+
+                <div class="story-highlights">
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Safe & Reliable Travel
+                    </div>
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Professional Drivers
+                    </div>
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Clean & Comfortable Vehicles
+                    </div>
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Customer-Focused Service
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= MISSION VISION VALUES ================= -->
+
+        <div class="about-values">
+
+            <div class="about-section-heading">
+
+                <span>
+                    WHAT DRIVES US
+                </span>
+
+                <h2>
+                    Our Mission, Vision & Values
+                </h2>
+
+                <p>
+                    Everything we do is focused on creating a
+                    better travel experience for our customers.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <!-- Mission -->
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-icon">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+
+                        <h3>
+                            Our Mission
+                        </h3>
+
+                        <p>
+                            To provide dependable, safe and
+                            comfortable transportation services
+                            while delivering a positive experience
+                            to every customer.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Vision -->
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-icon">
+                            <i class="bi bi-eye-fill"></i>
+                        </div>
+
+                        <h3>
+                            Our Vision
+                        </h3>
+
+                        <p>
+                            To become a trusted travel partner
+                            known for quality service, customer
+                            satisfaction and reliable transportation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Values -->
+
+                <div class="col-md-4">
+
+                    <div class="value-card">
+
+                        <div class="value-icon">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+
+                        <h3>
+                            Our Values
+                        </h3>
+
+                        <p>
+                            Safety, honesty, punctuality,
+                            professionalism and customer care
+                            are at the heart of everything we do.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= WHY CHOOSE US ================= -->
+
+        <div class="why-us">
+
+            <div class="row align-items-center g-5">
+
+
+                <!-- Content -->
+
+                <div class="col-lg-6">
+
+                    <span class="about-small-title">
+                        WHY CHOOSE US
+                    </span>
+
+                    <h2>
+                        Travel With
+                        <span>Confidence</span>
+                    </h2>
+
+                    <p>
+                        We understand that every journey is
+                        different. That's why we focus on providing
+                        flexible, reliable and comfortable travel
+                        solutions for every type of customer.
+                    </p>
+
+
+                    <div class="why-list">
+
+                        <div class="why-item">
+
+                            <div class="why-icon">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Safety First
+                                </h4>
+
+                                <p>
+                                    Your safety and comfort remain
+                                    our highest priorities.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="why-item">
+
+                            <div class="why-icon">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Professional Drivers
+                                </h4>
+
+                                <p>
+                                    Courteous and responsible drivers
+                                    committed to a smooth journey.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="why-item">
+
+                            <div class="why-icon">
+                                <i class="bi bi-car-front-fill"></i>
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Quality Vehicles
+                                </h4>
+
+                                <p>
+                                    Clean, comfortable and
+                                    well-maintained vehicles.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="why-item">
+
+                            <div class="why-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Punctual Service
+                                </h4>
+
+                                <p>
+                                    We value your time and strive
+                                    to be there when you need us.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Stats -->
+
+                <div class="col-lg-6">
+
+                    <div class="about-stats">
+
+                        <div class="stat-card">
+
+                            <i class="bi bi-people-fill"></i>
+
+                            <strong>
+                                1000+
+                            </strong>
+
+                            <span>
+                                Happy Customers
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <i class="bi bi-car-front-fill"></i>
+
+                            <strong>
+                                25+
+                            </strong>
+
+                            <span>
+                                Vehicles
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            <strong>
+                                50+
+                            </strong>
+
+                            <span>
+                                Destinations
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <i class="bi bi-headset"></i>
+
+                            <strong>
+                                24/7
+                            </strong>
+
+                            <span>
+                                Customer Support
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= ABOUT CTA ================= -->
+
+        <div class="about-cta">
+
+            <h2>
+                Ready to Start Your Journey?
+            </h2>
+
+            <p>
+                Let us make your next journey comfortable,
+                safe and hassle-free.
+            </p>
+
+            <a
+                href="#contact"
+                onclick="showSection('contact')"
+                class="about-cta-btn">
+
+                Get in Touch
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<link rel="stylesheet" href="./css/contact.css">
+<!-- =====================================================
+     CONTACT US SECTION
+===================================================== -->
+
+<section class="contact-section page-section" id="contact">
+
+    <div class="container">
+
+        <!-- ================= CONTACT HEADER ================= -->
+
+        <div class="contact-heading text-center">
+
+            <span class="contact-badge">
+                CONTACT US
+            </span>
+
+            <h1>
+                Let's Start Your
+                <span>Journey Together</span>
+            </h1>
+
+            <p>
+                Have a question, need a cab, or planning your next
+                trip? Get in touch with us and our team will be
+                happy to assist you.
+            </p>
+
+        </div>
+
+
+        <!-- ================= CONTACT CONTENT ================= -->
+
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 CONTACT INFORMATION
+            ================================================== -->
+
+            <div class="col-lg-5">
+
+                <div class="contact-info-card">
+
+                    <h2>
+                        Get In Touch
+                    </h2>
+
+                    <p class="contact-info-intro">
+                        We are here to help you with your travel
+                        requirements. Reach us through phone,
+                        WhatsApp or email.
+                    </p>
+
+
+                    <!-- Phone -->
+
+                    <a
+                        href="tel:+919999999999"
+                        class="contact-info-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+
+                        <div>
+                            <small>
+                                Call Us
+                            </small>
+
+                            <strong>
+                                +91 99999 99999
+                            </strong>
+                        </div>
+
+                    </a>
+
+
+                    <!-- WhatsApp -->
+
+                    <a
+                        href="https://wa.me/919999999999"
+                        target="_blank"
+                        class="contact-info-item">
+
+                        <div class="contact-icon whatsapp-icon">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+
+                        <div>
+                            <small>
+                                WhatsApp
+                            </small>
+
+                            <strong>
+                                Chat With Us
+                            </strong>
+                        </div>
+
+                    </a>
+
+
+                    <!-- Email -->
+
+                    <a
+                        href="mailto:info@yourcabservice.com"
+                        class="contact-info-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+
+                        <div>
+                            <small>
+                                Email Us
+                            </small>
+
+                            <strong>
+                                info@yourcabservice.com
+                            </strong>
+                        </div>
+
+                    </a>
+
+
+                    <!-- Location -->
+
+                    <div class="contact-info-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+
+                        <div>
+                            <small>
+                                Our Location
+                            </small>
+
+                            <strong>
+                                Navi Mumbai, Maharashtra
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Working Hours -->
+
+                    <div class="contact-info-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+
+                        <div>
+                            <small>
+                                Working Hours
+                            </small>
+
+                            <strong>
+                                Available 24 × 7
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Social Icons -->
+
+                    <div class="contact-social">
+
+                        <span>
+                            Follow Us
+                        </span>
+
+                        <div class="social-links">
+
+                            <a href="#" aria-label="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+
+                            <a href="#" aria-label="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+
+                            <a href="#" aria-label="Twitter">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+
+                            <a href="#" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONTACT FORM
+            ================================================== -->
+
+            <div class="col-lg-7">
+
+                <div class="contact-form-card">
+
+                    <div class="form-header">
+
+                        <span>
+                            SEND AN ENQUIRY
+                        </span>
+
+                        <h2>
+                            How Can We Help?
+                        </h2>
+
+                        <p>
+                            Fill in the details below and our team
+                            will get back to you.
+                        </p>
+
+                    </div>
+
+
+                    <form id="contactForm">
+
+
+                        <!-- Name + Phone -->
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label for="name">
+                                    Your Name
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="bi bi-person"></i>
+
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Enter your name"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label for="phone">
+                                    Phone Number
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="bi bi-telephone"></i>
+
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        placeholder="Enter phone number"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Email -->
+
+                            <div class="col-12">
+
+                                <label for="email">
+                                    Email Address
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="bi bi-envelope"></i>
+
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Enter your email"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Service -->
+
+                            <div class="col-md-6">
+
+                                <label for="service">
+                                    Service Required
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="bi bi-car-front"></i>
+
+                                    <select
+                                        id="service"
+                                        name="service">
+
+                                        <option value="">
+                                            Select a service
+                                        </option>
+
+                                        <option>
+                                            Local Cab
+                                        </option>
+
+                                        <option>
+                                            Airport Transfer
+                                        </option>
+
+                                        <option>
+                                            Outstation Cab
+                                        </option>
+
+                                        <option>
+                                            Corporate Travel
+                                        </option>
+
+                                        <option>
+                                            Wedding & Events
+                                        </option>
+
+                                        <option>
+                                            Group Travel
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Travel Type -->
+
+                            <div class="col-md-6">
+
+                                <label for="vehicle">
+                                    Vehicle Required
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="bi bi-car-front-fill"></i>
+
+                                    <select
+                                        id="vehicle"
+                                        name="vehicle">
+
+                                        <option value="">
+                                            Select vehicle
+                                        </option>
+
+                                        <option>
+                                            Sedan
+                                        </option>
+
+                                        <option>
+                                            Maruti Suzuki Ertiga
+                                        </option>
+
+                                        <option>
+                                            SUV
+                                        </option>
+
+                                        <option>
+                                            Premium SUV
+                                        </option>
+
+                                        <option>
+                                            Tempo Traveller
+                                        </option>
+
+                                        <option>
+                                            Luxury Car
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Message -->
+
+                            <div class="col-12">
+
+                                <label for="message">
+                                    Your Message
+                                </label>
+
+                                <div class="input-wrapper textarea-wrapper">
+
+                                    <i class="bi bi-chat-left-text"></i>
+
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        rows="5"
+                                        placeholder="Tell us about your travel requirements..."
+                                    ></textarea>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Submit -->
+
+                            <div class="col-12">
+
+                                <button
+                                    type="submit"
+                                    class="contact-submit-btn">
+
+                                    Send Enquiry
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= MAP / LOCATION ================= -->
+
+        <div class="contact-location">
+
+            <div class="location-header text-center">
+
+                <span>
+                    FIND US
+                </span>
+
+                <h2>
+                    Our Location
+                </h2>
+
+            </div>
+
+
+            <div class="map-container">
+
+                <iframe
+                    src="https://www.google.com/maps?q=Navi%20Mumbai%2C%20Maharashtra&output=embed"
+                    width="100%"
+                    height="400"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= BOTTOM CTA ================= -->
+
+        <div class="contact-bottom">
+
+            <div>
+
+                <h3>
+                    Need a Cab Right Now?
+                </h3>
+
+                <p>
+                    Call us directly or connect with us on WhatsApp.
+                </p>
+
+            </div>
+
+
+            <div class="contact-bottom-buttons">
+
+                <a
+                    href="tel:+919999999999"
+                    class="call-btn">
+
+                    <i class="bi bi-telephone-fill"></i>
+
+                    Call Now
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/919999999999"
+                    target="_blank"
+                    class="whatsapp-btn">
+
+                    <i class="bi bi-whatsapp"></i>
+
+                    WhatsApp
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+    <!-- Bootstrap JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+</body>
+</html>
+
