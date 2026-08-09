@@ -147,45 +147,44 @@
     }
 
     /* Bootstrap mobile menu button */
-    .custom-navbar .navbar-toggler {
-        display: block;
-        width: 46px;
-        height: 42px;
-        padding: 8px;
-        border: 1px solid #222;
-        border-radius: 8px;
-        background: #ffffff;
-        box-shadow: none;
-    }
+   .custom-navbar .navbar-toggler {
+    display: block;
+    width: 46px;
+    height: 42px;
 
-    .custom-navbar .navbar-toggler:focus {
-        outline: none;
-        box-shadow: none;
-    }
+    padding: 8px;
 
-    /* Make hamburger icon visible */
-    .custom-navbar .navbar-toggler-icon {
-        display: block;
-        width: 100%;
-        height: 100%;
+    border: 1px solid #222;
+    border-radius: 8px;
 
-        background-image:
-            linear-gradient(#222, #222),
-            linear-gradient(#222, #222),
-            linear-gradient(#222, #222);
+    background: #fff;
 
-        background-size:
-            100% 2px,
-            100% 2px,
-            100% 2px;
+    box-shadow: none;
+}
 
-        background-position:
-            center top,
-            center center,
-            center bottom;
+   /* Mobile hamburger icon */
+.custom-navbar .navbar-toggler-icon {
+    display: block;
+    width: 24px;
+    height: 20px;
 
-        background-repeat: no-repeat;
-    }
+    background-image:
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000);
+
+    background-size:
+        100% 2px,
+        100% 2px,
+        100% 2px;
+
+    background-position:
+        center top,
+        center center,
+        center bottom;
+
+    background-repeat: no-repeat;
+}
 
     /* Mobile dropdown */
     .custom-navbar .navbar-collapse {
